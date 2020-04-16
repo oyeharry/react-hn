@@ -1,4 +1,4 @@
-import News, { getServerSideProps as newsGetServerSideProps } from './News';
+import News, { getServerSideProps as newsGetServerSideProps } from './news';
 import Page404 from './404';
 
 const routes = [
