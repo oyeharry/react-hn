@@ -27,18 +27,18 @@ function getStaticResponseString(path, data) {
     styles = sheet.getStyleElement();
   } catch (error) {
     console.error(error);
-  } finally {
-    const html = `<!DOCTYPE html> ${renderToString(
-      <Document title="Hacker News" data={data} styles={styles}>
-        {app}
-      </Document>
-    )}`;
-    sheet.seal();
-    return html;
   }
+
+  const html = `<!DOCTYPE html> ${renderToString(
+    <Document title="Hacker News" data={data} styles={styles}>
+      {app}
+    </Document>
+  )}`;
+  sheet.seal();
+  return html;
 }
 
-const appRoutes = routes.map((route) => {
+routes.map((route) => {
   app.get(route.path, (req, res) => {
     const { path } = req;
 

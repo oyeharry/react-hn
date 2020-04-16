@@ -1,22 +1,22 @@
-import News from "./News";
-import Page404 from "./404";
+import News from './News';
+import Page404 from './404';
 
 const routes = [
   {
-    path: "/news/:pageNum",
+    path: '/news/:pageNum',
     component: News,
   },
   {
-    path: "/news",
+    path: '/news',
     component: News,
   },
   {
-    path: "/",
+    path: '/',
     exact: true,
     component: News,
   },
   {
-    path: "/*",
+    path: '/*',
     component: Page404,
   },
 ];
