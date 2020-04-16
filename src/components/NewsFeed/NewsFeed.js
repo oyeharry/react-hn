@@ -69,14 +69,15 @@ function NewsFeed(props) {
             alignItems={['flex-start', 'center']}
             flexDirection={['column', 'row']}
           >
-            <Anchor
-              fontSize={['5', '6']}
-              maxWidth={['200px', '300px', '300px']}
-              noTextOverflow
-              href={url}
-              p="0"
-            >
-              {title}
+            <Anchor fontSize={['5', '6']} href={url} p="0">
+              <Text
+                noTextOverflow
+                as="span"
+                display="inline-block"
+                maxWidth={['200px', '300px', '300px']}
+              >
+                {title}
+              </Text>
             </Anchor>
 
             <Anchor
