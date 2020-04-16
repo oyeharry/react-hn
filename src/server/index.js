@@ -42,8 +42,8 @@ routes.map((route) => {
   app.get(route.path, (req, res) => {
     const { path } = req;
 
-    if (route && typeof route.component.getServerSideProps === 'function') {
-      route.component.getServerSideProps(req).then((data) => {
+    if (route && typeof route.getServerSideProps === 'function') {
+      route.getServerSideProps(req).then((data) => {
         res.status(200).send(getStaticResponseString(path, data));
       });
     } else {

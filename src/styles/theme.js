@@ -20,6 +20,7 @@ const Theme = {
     },
     springWood: '#F6F6F0',
     blackSqueeze: '#E6E6E0',
+    frenchGray: '#BDBCBD',
     gray: {
       300: '#f3f3f3',
       400: '#4a4a4a',
