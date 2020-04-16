@@ -43,7 +43,7 @@ function getProcessedNewsFeedData(newsFeedData) {
   };
 }
 
-export async function queryNewsFeed(page, hitsPerPage = 4) {
+export async function queryNewsFeed(page, hitsPerPage = 30) {
   const url = `${newsFeedSearchEndpoint}&page=${page}&hitsPerPage=${hitsPerPage}`;
   const response = await fetch(url);
 

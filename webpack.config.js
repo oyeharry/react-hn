@@ -1,5 +1,6 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
+const { GenerateSW } = require('workbox-webpack-plugin');
 
 const commonConfig = {
   // stats: 'verbose',
@@ -8,6 +9,8 @@ const commonConfig = {
 const clientConfig = {
   ...commonConfig,
   entry: './src/client/index.js',
+
+  plugins: [new GenerateSW()],
 
   module: {
     rules: [{ test: /\.js/, exclude: /node_modules/, use: 'babel-loader' }],
