@@ -12,6 +12,7 @@ function Header(props) {
             borderWidth="1px"
             borderStyle="solid"
             borderColor="white"
+            alt="Hacker News Logo"
             src="/assets/images/y18.gif"
           ></Image>
         </Box>

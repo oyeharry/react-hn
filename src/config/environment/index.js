@@ -1,12 +1,12 @@
 import path from 'path';
-import _ from 'lodash';
 
-var rootPath = path.normalize(path.join(__dirname, '/..'));
-var env = process.env;
+const rootPath = path.normalize(path.join(__dirname, '/..'));
+const env = process.env;
+let config;
 
 // All configurations will extend these options
 // ============================================
-var all = {
+const all = {
   reactAppId: '__hacker_news_app',
 
   env: env.NODE_ENV,
@@ -21,6 +21,12 @@ var all = {
   port: process.env.PORT || 9000,
 };
 
+if (env.NODE_ENV === 'production') {
+  config = { ...all, ...require(`./${env.NODE_ENV}.js`) };
+} else {
+  config = { ...all, ...require(`./${env.NODE_ENV}.js`).default };
+}
+
 // Export the config object based on the NODE_ENV
 // ==============================================
-export default _.merge(all, require(`./${env.NODE_ENV}.js`).default || {});
+export default config;

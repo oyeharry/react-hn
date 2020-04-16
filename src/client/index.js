@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import config from '../config/environment';
 import App from '../pages/_app';
+import serviceWorker from './serviceWorker';
 
 hydrate(
   <BrowserRouter>
@@ -11,3 +12,5 @@ hydrate(
   </BrowserRouter>,
   document.getElementById(config.reactAppId)
 );
+
+serviceWorker.register();

@@ -10,8 +10,11 @@ function Document(props) {
     <html lang="en">
       <head>
         <meta charSet="UTF-8" />
-        <meta name="description" content="Hacker News React App"></meta>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="Hacker News React App" />
+        <meta name="theme-color" content="#000000" />
+        <link rel="apple-touch-icon" href="/assets/images/hn-logo-192.png" />
+        <link rel="manifest" href="/manifest.json" />
         <title>{title}</title>
         {styles}
         <script
