@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
+import { Reset } from 'styled-reset';
 
 import routes from './routes';
 import Page404 from './404';
@@ -14,6 +15,7 @@ function App(props) {
 
   return (
     <ThemeProvider theme={theme}>
+      <Reset />
       <Box flexDirection="column" maxWidth="2" margin="0 auto">
         <Header></Header>
         <Switch>
