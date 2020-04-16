@@ -32,7 +32,6 @@ export default function (app) {
     app.use(enforce.HTTPS({ trustProtoHeader: true }));
     app.use(express.static(path.join(config.root, 'build')));
     app.use(express.static(path.join(config.root, 'src', 'static')));
-    // app.set('appPath', config.root + '/build');
   }
 
   if (env === 'development') {
