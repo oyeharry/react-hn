@@ -1,11 +1,29 @@
 import React from 'react';
-import styled from 'styled-components';
 
-const H1 = styled.h1`
-  color: green;
-`;
+import Box from '../components/Box';
+import Button from '../components/Button';
+import NewsFeed from '../components/NewsFeed';
 
-const News = (props) => <H1>This is news feed page {props.awesome}</H1>;
+function News(props) {
+  const { data } = props;
+  return (
+    <Box pt="3" bg="springWood">
+      <NewsFeed></NewsFeed>
+      <NewsFeed highlighted></NewsFeed>
+      <NewsFeed></NewsFeed>
+      <NewsFeed highlighted></NewsFeed>
+      <NewsFeed></NewsFeed>
+      <NewsFeed highlighted></NewsFeed>
+      <NewsFeed></NewsFeed>
+      <NewsFeed highlighted></NewsFeed>
+      <Box>
+        <Button color="primary.main" ml="5">
+          More
+        </Button>
+      </Box>
+    </Box>
+  );
+}
 
 News.getServerSideProps = () => {
   return Promise.resolve({
