@@ -7,6 +7,7 @@ import Text from '../components/Text';
 import Anchor from '../components/Anchor';
 import NewsFeed from '../components/NewsFeed';
 import NewsFeedService from '../components/NewsFeedService';
+import UserService from '../components/UserService';
 
 export async function getServerSideProps(req) {
   const { params } = req;
@@ -18,16 +19,40 @@ export async function getServerSideProps(req) {
   return {
     props: {
       newsFeedData: { [pageNum]: newsFeedPageData },
+      // votedNewsFeedIds and hiddenNewsFeedIds Should be updated once service integrated
+      // userData: { votedNewsFeedIds: null, hiddenNewsFeedIds: null },
+      userData: {},
     },
   };
 }
 
 function News(props) {
-  const { newsFeedData } = props;
+  const { newsFeedData, userData: appUserData } = props;
   const { pageNum = 0 } = useParams();
+  const [userData, setUserData] = useState(appUserData);
   const [newsFeedDataByPage, setNewsFeedDataByPage] = useState(newsFeedData);
   const [newsFeedDataLoading, setNewsFeedDataLoading] = useState(false);
-  const [curPageNewsFeedData, setCurPageNewsFeedData] = useState({ hits: [] });
+  const [curPageNewsFeedData = { hits: [] }, setCurPageNewsFeedData] = useState(
+    newsFeedDataByPage[pageNum]
+  );
+
+  const onUpVoteButtonClick = (id) => {
+    UserService.voteNewsFeed(id).then((response) => {
+      if (response.success) {
+        userData.votedNewsFeedIds.push(id);
+        setUserData({ ...userData });
+      }
+    });
+  };
+
+  const onHideButtonClick = (id) => {
+    UserService.hideNewsFeed(id).then((response) => {
+      if (response.success) {
+        userData.hiddenNewsFeedIds.push(id);
+        setUserData({ ...userData });
+      }
+    });
+  };
 
   useEffect(() => {
     if (!newsFeedDataByPage[pageNum]) {
@@ -44,39 +69,43 @@ function News(props) {
           setNewsFeedDataLoading(false);
         });
     }
+
+    if (!userData.votedNewsFeedIds || !userData.hiddenNewsFeedIds) {
+      Promise.all([
+        UserService.getVotedNewsFeedIds(),
+        UserService.getHiddenNewsFeedIds(),
+      ]).then(([votedNewsFeedIds, hiddenNewsFeedIds]) => {
+        setUserData({ ...userData, votedNewsFeedIds, hiddenNewsFeedIds });
+      });
+    }
   }, [pageNum]);
 
   useEffect(() => {
     const curPageNewsFeedData = newsFeedDataByPage[pageNum] || { hits: [] };
     setCurPageNewsFeedData(curPageNewsFeedData);
-  }, [newsFeedDataByPage]);
+  }, [newsFeedDataByPage, userData]);
+
+  const {
+    votedNewsFeedIds: userVotedNewsFeedIds = [],
+    hiddenNewsFeedIds: userHiddenNewsFeedIds = [],
+  } = userData || {};
 
   return (
     <Box pt="3" bg="springWood">
       {curPageNewsFeedData.hits.map((newsFeedHit, index) => {
-        const {
-          totalComments,
-          totalUpVotes,
-          title,
-          linkDomain,
-          username,
-          postedWhen,
-          id,
-          url,
-        } = newsFeedHit;
+        const { id } = newsFeedHit;
 
         return (
-          <NewsFeed
-            highlighted={index % 2 !== 0}
-            key={id}
-            totalComments={totalComments}
-            totalUpVotes={totalUpVotes}
-            title={title}
-            linkDomain={linkDomain}
-            username={username}
-            postedWhen={postedWhen}
-            url={url}
-          />
+          userHiddenNewsFeedIds.indexOf(id) === -1 && (
+            <NewsFeed
+              voted={userVotedNewsFeedIds.indexOf(id) !== -1}
+              onUpVoteButtonClick={onUpVoteButtonClick}
+              onHideButtonClick={onHideButtonClick}
+              highlighted={index % 2 !== 0}
+              key={id}
+              data={newsFeedHit}
+            />
+          )
         );
       })}
       <Box ml="13%">

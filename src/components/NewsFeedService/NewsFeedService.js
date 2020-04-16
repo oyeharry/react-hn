@@ -6,6 +6,7 @@ const newsFeedSearchEndpoint =
 
 function getProcessedNewsFeedData(newsFeedData) {
   const { hits: newsFeedHits = [], page, nbPages, hitsPerPage } = newsFeedData;
+
   return {
     page,
     nbPages,
@@ -18,6 +19,7 @@ function getProcessedNewsFeedData(newsFeedData) {
         url = '',
         created_at_i: createdAtI,
         points: totalUpVotes,
+        objectID,
       } = newsFeedHit;
 
       const [linkDomain] =
@@ -36,13 +38,13 @@ function getProcessedNewsFeedData(newsFeedData) {
         username,
         postedWhen,
         url,
-        id: createdAtI,
+        id: objectID,
       };
     }),
   };
 }
 
-export async function queryNewsFeed(page, hitsPerPage = 50) {
+export async function queryNewsFeed(page, hitsPerPage = 4) {
   const url = `${newsFeedSearchEndpoint}&page=${page}&hitsPerPage=${hitsPerPage}`;
   const response = await fetch(url);
 
