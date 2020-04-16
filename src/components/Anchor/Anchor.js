@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom';
 import { space, layout, border, typography, color } from 'styled-system';
 
 function Anchor(props) {
-  const { href, children, ...rest } = props;
-  const Component = href ? 'a' : Link;
+  const { to, children, maxWidth, noTextOverflow, ...rest } = props;
+  const Component = to ? Link : 'a';
   return (
-    <Component href={href} {...rest}>
+    <Component to={to} {...rest}>
       {children}
     </Component>
   );
@@ -34,8 +34,8 @@ StyledAnchor.defaultProps = {
 };
 
 StyledAnchor.propTypes = {
-  fontFamily: PropTypes.string,
-  fontSize: PropTypes.string,
+  fontFamily: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  fontSize: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   href: PropTypes.string,
 };
 

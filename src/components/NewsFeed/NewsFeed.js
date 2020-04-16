@@ -10,16 +10,22 @@ import Anchor from '../Anchor';
 function NewsFeed(props) {
   const {
     highlighted,
+    voted,
+    data,
+    onUpVoteButtonClick,
+    onHideButtonClick,
+  } = props;
+
+  const {
     totalComments,
     totalUpVotes,
     title,
     linkDomain,
     username,
     postedWhen,
-    onUpVoteButtonClick,
-    onHideButtonClick,
     url,
-  } = props;
+    id,
+  } = data;
 
   return (
     <Box
@@ -36,17 +42,20 @@ function NewsFeed(props) {
           <Text color="primary.dark">{totalUpVotes}</Text>
         </Box>
         <Box padding="0">
-          <Button
-            padding="0"
-            onClick={onUpVoteButtonClick}
-            aria-label="Up Vote"
-          >
-            <Image
-              alt="Up Vote"
-              size="12px"
-              src="/assets/images/grayarrow2x.gif"
-            ></Image>
-          </Button>
+          {!voted && (
+            <Button
+              padding="0"
+              onClick={() => onUpVoteButtonClick(id)}
+              aria-label="Up Vote"
+            >
+              <Image
+                alt="Up Vote"
+                size="12px"
+                src="/assets/images/grayarrow2x.gif"
+              ></Image>
+            </Button>
+          )}
+          {voted && <Box size="12px" />}
         </Box>
         <Box
           padding="2"
@@ -60,14 +69,15 @@ function NewsFeed(props) {
             alignItems={['flex-start', 'center']}
             flexDirection={['column', 'row']}
           >
-            <Anchor
-              fontSize={['5', '6']}
-              maxWidth={['200px', '300px', '300px']}
-              noTextOverflow
-              href={url}
-              p="0"
-            >
-              {title}
+            <Anchor fontSize={['5', '6']} href={url} p="0">
+              <Text
+                noTextOverflow
+                as="span"
+                display="inline-block"
+                maxWidth={['200px', '300px', '300px']}
+              >
+                {title}
+              </Text>
             </Anchor>
 
             <Anchor
@@ -99,7 +109,11 @@ function NewsFeed(props) {
               {postedWhen}
             </Text>
             <Box padding="1" display="flex">
-              <Button padding="0" aria-label="Hide" onClick={onHideButtonClick}>
+              <Button
+                padding="0"
+                aria-label="Hide News Feed"
+                onClick={() => onHideButtonClick(id)}
+              >
                 <Text fontSize="4" color="gray.600" as="span">
                   [
                 </Text>
@@ -119,25 +133,31 @@ function NewsFeed(props) {
 }
 
 NewsFeed.defaultProps = {
-  totalComments: 0,
-  totalUpVotes: 0,
-  title: '',
-  linkDomain: '',
-  username: '',
-  postedWhen: '',
-  url: '',
+  data: {
+    totalComments: 0,
+    totalUpVotes: 0,
+    title: '',
+    linkDomain: '',
+    username: '',
+    postedWhen: '',
+    url: '',
+  },
+  voted: false,
   onUpVoteButtonClick: () => {},
   onHideButtonClick: () => {},
 };
 
 NewsFeed.propTypes = {
-  totalComments: PropTypes.number,
-  totalUpVotes: PropTypes.number,
-  title: PropTypes.string,
-  linkDomain: PropTypes.string,
-  username: PropTypes.string,
-  postedWhen: PropTypes.string,
-  url: PropTypes.string,
+  data: PropTypes.shape({
+    totalComments: PropTypes.number,
+    totalUpVotes: PropTypes.number,
+    title: PropTypes.string,
+    linkDomain: PropTypes.string,
+    username: PropTypes.string,
+    postedWhen: PropTypes.string,
+    url: PropTypes.string,
+  }),
+  voted: PropTypes.bool,
   onUpVoteButtonClick: PropTypes.func,
   onHideButtonClick: PropTypes.func,
 };
