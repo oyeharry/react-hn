@@ -18,6 +18,7 @@ const Button = styled.button`
 
 Button.defaultProps = {
   fontFamily: 'primary',
+  fontSize: '15px',
 };
 
 Button.propTypes = {};
