@@ -31,11 +31,13 @@ export default function (app) {
   if (env === 'production') {
     app.use(enforce.HTTPS({ trustProtoHeader: true }));
     app.use(express.static(path.join(config.root, 'build')));
+    app.use(express.static(path.join(config.root, 'src', 'static')));
     // app.set('appPath', config.root + '/build');
   }
 
   if (env === 'development') {
     app.use(express.static(path.join(config.root, 'build')));
+    app.use(express.static(path.join(config.root, 'src', 'static')));
     app.use(errorHandler()); /* Error handler - has to be last */
   }
 }
