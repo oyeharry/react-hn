@@ -5,6 +5,7 @@ import Box from '../Box';
 import Text from '../Text';
 import Image from '../Image';
 import Button from '../Button';
+import Anchor from '../Anchor';
 
 function NewsFeed(props) {
   const {
@@ -15,6 +16,9 @@ function NewsFeed(props) {
     linkDomain,
     username,
     postedWhen,
+    onUpVoteButtonClick,
+    onHideButtonClick,
+    url,
   } = props;
 
   return (
@@ -32,7 +36,17 @@ function NewsFeed(props) {
           <Text color="primary.dark">{totalUpVotes}</Text>
         </Box>
         <Box padding="0">
-          <Image size="12px" src="/assets/images/grayarrow2x.gif"></Image>
+          <Button
+            padding="0"
+            onClick={onUpVoteButtonClick}
+            aria-label="Up Vote"
+          >
+            <Image
+              alt="Up Vote"
+              size="12px"
+              src="/assets/images/grayarrow2x.gif"
+            ></Image>
+          </Button>
         </Box>
         <Box
           padding="2"
@@ -46,19 +60,26 @@ function NewsFeed(props) {
             alignItems={['flex-start', 'center']}
             flexDirection={['column', 'row']}
           >
-            <Text
+            <Anchor
               fontSize={['5', '6']}
-              as="p"
               maxWidth={['200px', '300px', '300px']}
               noTextOverflow
-              alt={title}
-              title={title}
+              href={url}
+              p="0"
             >
               {title}
-            </Text>
-            <Text fontSize="4" padding={['0', '1']} color="gray.600" as="span">
-              ({linkDomain})
-            </Text>
+            </Anchor>
+
+            <Anchor
+              fontSize="4"
+              padding={['0', '1']}
+              color="gray.600"
+              href={url}
+            >
+              <Text as="span">{linkDomain && '('}</Text>
+              <Text as="span">{linkDomain}</Text>
+              <Text as="span">{linkDomain && ')'}</Text>
+            </Anchor>
           </Box>
 
           <Box display="flex" alignItems="center" mt={['1', '1', '0']}>
@@ -78,7 +99,7 @@ function NewsFeed(props) {
               {postedWhen}
             </Text>
             <Box padding="1" display="flex">
-              <Button padding="0">
+              <Button padding="0" aria-label="Hide" onClick={onHideButtonClick}>
                 <Text fontSize="4" color="gray.600" as="span">
                   [
                 </Text>
@@ -98,12 +119,15 @@ function NewsFeed(props) {
 }
 
 NewsFeed.defaultProps = {
-  totalComments: 19,
-  totalUpVotes: 82,
-  title: 'Seemingly Impossible Swift Programs',
-  linkDomain: '(fewbutrip.com)',
-  username: 'wool_gather',
-  postedWhen: '5 hours ago',
+  totalComments: 0,
+  totalUpVotes: 0,
+  title: '',
+  linkDomain: '',
+  username: '',
+  postedWhen: '',
+  url: '',
+  onUpVoteButtonClick: () => {},
+  onHideButtonClick: () => {},
 };
 
 NewsFeed.propTypes = {
@@ -113,6 +137,9 @@ NewsFeed.propTypes = {
   linkDomain: PropTypes.string,
   username: PropTypes.string,
   postedWhen: PropTypes.string,
+  url: PropTypes.string,
+  onUpVoteButtonClick: PropTypes.func,
+  onHideButtonClick: PropTypes.func,
 };
 
 export default NewsFeed;
