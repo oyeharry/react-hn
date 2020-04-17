@@ -12,7 +12,7 @@ exports[`NewsFeed Should render component voted enabled 1`] = `
     width="100%"
   >
     <div
-      className="sc-AxjAm bUildF"
+      className="sc-AxjAm cNnzHF"
       width={
         Array [
           "40px",
@@ -70,7 +70,7 @@ exports[`NewsFeed Should render component voted enabled 1`] = `
           to=""
         >
           <span
-            className="sc-AxirZ byKZYv"
+            className="sc-AxirZ kfVTnw"
             color="text.primary"
             display="inline-block"
             fontFamily="primary"
@@ -210,7 +210,7 @@ exports[`NewsFeed Should render component with default props 1`] = `
     width="100%"
   >
     <div
-      className="sc-AxjAm bUildF"
+      className="sc-AxjAm cNnzHF"
       width={
         Array [
           "40px",
@@ -278,7 +278,7 @@ exports[`NewsFeed Should render component with default props 1`] = `
           to=""
         >
           <span
-            className="sc-AxirZ byKZYv"
+            className="sc-AxirZ kfVTnw"
             color="text.primary"
             display="inline-block"
             fontFamily="primary"
