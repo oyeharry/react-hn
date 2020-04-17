@@ -6,14 +6,17 @@
   "author": "Harminder",
   "license": "MIT",
   "scripts": {
-    "start": "node ./build/server.js",
-    "build": "webpack --config webpack.config.js --mode=production",
-    "dev:build-server": "webpack --config webpack.config.js --mode=development -w",
-    "dev:start": "nodemon ./build/server.js",
-    "dev": "npm-run-all --parallel dev:*",
+    "dev": "run-p dev:webpack dev:start",
     "test": "jest",
+    "build": "run-s clean static:copy prod:webpack",
+    "start": "node ./build/server.js",
     "eslint": "eslint src/ --ext .js",
-    "test:build": "yarn eslint && yarn test && yarn build"
+    "clean": "shx rm -rf build",
+    "dev:webpack": "webpack --config webpack.config.js --mode=development -w",
+    "dev:start": "nodemon ./build/server.js",
+    "test:build": "run-s eslint test build",
+    "static:copy": "shx cp -r 'src/static' build",
+    "prod:webpack": "webpack --config webpack.config.js --mode=production"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
@@ -34,6 +37,7 @@
     "npm-run-all": "^4.1.5",
     "prettier-eslint": "^9.0.1",
     "react-test-renderer": "^16.13.1",
+    "shx": "^0.3.2",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
     "webpack-node-externals": "^1.7.2"

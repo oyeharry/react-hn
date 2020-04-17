@@ -10,7 +10,33 @@ const clientConfig = {
   ...commonConfig,
   entry: './src/client/index.js',
 
-  plugins: [new GenerateSW()],
+  plugins: [
+    new GenerateSW({
+      // swDest: 'sw.js',
+      clientsClaim: true,
+      skipWaiting: true,
+      runtimeCaching: [
+        {
+          urlPattern: /\//,
+          handler: 'StaleWhileRevalidate',
+          options: {
+            cacheName: 'index-page-cache',
+          },
+        },
+        {
+          urlPattern: /\.(?:png|gif|jpg|jpeg|svg|ico|json)$/,
+          handler: 'CacheFirst',
+          options: {
+            cacheName: 'assets-cache',
+            expiration: {
+              maxEntries: 60,
+              maxAgeSeconds: 1 * 24 * 60 * 60, // 1 Day
+            },
+          },
+        },
+      ],
+    }),
+  ],
 
   module: {
     rules: [{ test: /\.js/, exclude: /node_modules/, use: 'babel-loader' }],
