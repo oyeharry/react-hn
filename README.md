@@ -73,7 +73,7 @@ Before you start, take a moment to see how the project structure looks like:
 ├── src
 │   ├── client # Client side initialization.
 │   │   ├── index.js
-│   │   └── serviceWorker.js # Service registration.
+│   │   └── serviceWorker.js # Service worker registration for caching and offline.
 │   ├── components # All the reusable component lives here.
 │   │   ├── Anchor
 │   │   ├── Box
