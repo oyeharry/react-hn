@@ -3,7 +3,7 @@ import Box from '../Box';
 import Text from '../Text';
 import Image from '../Image';
 
-function Header(props) {
+function Header() {
   return (
     <header>
       <Box display="flex" bg="primary.main" alignItems="center">

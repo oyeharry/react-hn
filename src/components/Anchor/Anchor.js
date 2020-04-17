@@ -5,7 +5,10 @@ import { Link } from 'react-router-dom';
 import { space, layout, border, typography, color } from 'styled-system';
 
 function Anchor(props) {
-  const { to, children, maxWidth, noTextOverflow, ...rest } = props;
+  const { to, children, ...rest } = props;
+  delete rest.maxWidth;
+  delete rest.noTextOverflow;
+
   const Component = to ? Link : 'a';
   return (
     <Component to={to} {...rest}>
@@ -13,6 +16,27 @@ function Anchor(props) {
     </Component>
   );
 }
+
+Anchor.defaultProps = {
+  fontFamily: 'primary',
+  fontSize: '15px',
+  color: 'text.primary',
+  href: null,
+  to: '',
+  children: null,
+  maxWidth: null,
+  noTextOverflow: false,
+};
+
+Anchor.propTypes = {
+  fontFamily: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  fontSize: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  href: PropTypes.string,
+  to: PropTypes.string,
+  children: PropTypes.node,
+  maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  noTextOverflow: PropTypes.bool,
+};
 
 const StyledAnchor = styled(Anchor)`
   display: inline-block;
@@ -26,17 +50,7 @@ const StyledAnchor = styled(Anchor)`
   ${color}
 `;
 
-StyledAnchor.defaultProps = {
-  fontFamily: 'primary',
-  fontSize: '15px',
-  color: 'text.primary',
-  href: null,
-};
-
-StyledAnchor.propTypes = {
-  fontFamily: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  fontSize: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  href: PropTypes.string,
-};
+StyledAnchor.defaultProps = Anchor.defaultProps;
+StyledAnchor.propTypes = Anchor.propTypes;
 
 export default StyledAnchor;

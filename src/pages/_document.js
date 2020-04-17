@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import serialize from 'serialize-javascript';
 
 import config from '../config/environment';
@@ -30,5 +31,19 @@ function Document(props) {
     </html>
   );
 }
+
+Document.defaultProps = {
+  title: '',
+  styles: null,
+  children: null,
+  data: {},
+};
+
+Document.propTypes = {
+  title: PropTypes.string,
+  styles: PropTypes.arrayOf(PropTypes.object),
+  children: PropTypes.node,
+  data: PropTypes.shape({}),
+};
 
 export default Document;

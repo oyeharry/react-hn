@@ -64,6 +64,7 @@ function News(props) {
             [pageNum]: fetchedNewsFeedData,
           });
           setNewsFeedDataLoading(false);
+          window.scrollTo(0, 0);
         })
         .catch(() => {
           setNewsFeedDataLoading(false);
@@ -92,11 +93,15 @@ function News(props) {
 
   return (
     <Box pt="3" bg="springWood">
-      {curPageNewsFeedData.hits.map((newsFeedHit, index) => {
-        const { id } = newsFeedHit;
+      {curPageNewsFeedData.hits
+        .filter((newsFeedHit) => {
+          const { id } = newsFeedHit;
+          return userHiddenNewsFeedIds.indexOf(id) === -1;
+        })
+        .map((newsFeedHit, index) => {
+          const { id } = newsFeedHit;
 
-        return (
-          userHiddenNewsFeedIds.indexOf(id) === -1 && (
+          return (
             <NewsFeed
               voted={userVotedNewsFeedIds.indexOf(id) !== -1}
               onUpVoteButtonClick={onUpVoteButtonClick}
@@ -105,9 +110,8 @@ function News(props) {
               key={id}
               data={newsFeedHit}
             />
-          )
-        );
-      })}
+          );
+        })}
       <Box ml="13%">
         {newsFeedDataLoading ? (
           <Text p="2">Loading...</Text>
@@ -129,11 +133,16 @@ News.propTypes = {
   newsFeedData: PropTypes.shape({
     hits: PropTypes.arrayOf(PropTypes.object),
   }),
+  userData: PropTypes.shape({
+    votedNewsFeedIds: PropTypes.arrayOf(PropTypes.object),
+    hiddenNewsFeedIds: PropTypes.arrayOf(PropTypes.object),
+  }),
 };
 
 News.defaultProps = {
   pageNum: '0',
   newsFeedData: { hits: [] },
+  userData: {},
 };
 
 export default News;

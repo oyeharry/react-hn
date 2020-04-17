@@ -1,5 +1,3 @@
-import fetch from 'cross-fetch';
-
 // ====== Local Storage Implementation for upvotes and hidden news feed
 const upVotedNewsFeedStorageKey = '__hacker_news_app_up_vote_news_feeds';
 const hiddenNewsFeedStorageKey = '__hacker_news_app_up_hidden_news_feeds';
@@ -36,14 +34,6 @@ function setLocalStorageHiddenNewsIds(newsFeedId) {
   }
 }
 // ============
-
-export async function queryNewsFeed(page, hitsPerPage = 50) {
-  const url = `${newsFeedSearchEndpoint}&page=${page}&hitsPerPage=${hitsPerPage}`;
-  const response = await fetch(url);
-
-  const newsFeedData = await response.json();
-  return getProcessedNewsFeedData(newsFeedData);
-}
 
 export async function voteNewsFeed(newsFeedId) {
   setLocalStorageUpVoteIds(newsFeedId);
