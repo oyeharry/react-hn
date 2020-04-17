@@ -33,9 +33,10 @@ function NewsFeed(props) {
       alignItems="center"
       bg={highlighted ? 'blackSqueeze' : 'transparent'}
       flexDirection={['column', 'row']}
+      width="100%"
     >
-      <Box display="flex" alignItems="center">
-        <Box mr={['2', '5']} width={['40px', '80px']}>
+      <Box display="flex" alignItems="center" width="100%">
+        <Box ml={['2', '5']} mr={['2', '5']} width={['40px', '80px']}>
           <Text textAlign="right">{totalComments}</Text>
         </Box>
         <Box padding="2">
@@ -82,7 +83,8 @@ function NewsFeed(props) {
 
             <Anchor
               fontSize="4"
-              padding={['0', '1']}
+              p={['0', '1']}
+              mt={['1', '0', '0']}
               color="gray.600"
               href={url}
             >
@@ -100,7 +102,7 @@ function NewsFeed(props) {
           </Box>
 
           <Box
-            pt={['1', '1', '0']}
+            mt={['1', '1', '0']}
             pl={['0', '0', '1']}
             display="flex"
             alignItems="center"
@@ -108,7 +110,7 @@ function NewsFeed(props) {
             <Text fontSize="4" color="gray.600">
               {postedWhen}
             </Text>
-            <Box padding="1" display="flex">
+            <Box pl="1" pr="1" display="flex">
               <Button
                 padding="0"
                 aria-label="Hide News Feed"
@@ -141,8 +143,10 @@ NewsFeed.defaultProps = {
     username: '',
     postedWhen: '',
     url: '',
+    id: '0',
   },
   voted: false,
+  highlighted: false,
   onUpVoteButtonClick: () => {},
   onHideButtonClick: () => {},
 };
@@ -156,8 +160,10 @@ NewsFeed.propTypes = {
     username: PropTypes.string,
     postedWhen: PropTypes.string,
     url: PropTypes.string,
+    id: PropTypes.string,
   }),
   voted: PropTypes.bool,
+  highlighted: PropTypes.bool,
   onUpVoteButtonClick: PropTypes.func,
   onHideButtonClick: PropTypes.func,
 };

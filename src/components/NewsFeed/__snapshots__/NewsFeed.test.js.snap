@@ -1,0 +1,407 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewsFeed Should render component voted enabled 1`] = `
+<div
+  className="sc-AxjAm ccOFVg"
+  display="flex"
+  width="100%"
+>
+  <div
+    className="sc-AxjAm kzHeKe"
+    display="flex"
+    width="100%"
+  >
+    <div
+      className="sc-AxjAm bUildF"
+      width={
+        Array [
+          "40px",
+          "80px",
+        ]
+      }
+    >
+      <p
+        className="sc-AxirZ EZtwn"
+        color="text.primary"
+        fontFamily="primary"
+      >
+        0
+      </p>
+    </div>
+    <div
+      className="sc-AxjAm iAlmwV"
+    >
+      <p
+        className="sc-AxirZ eZcgVC"
+        color="primary.dark"
+        fontFamily="primary"
+      >
+        0
+      </p>
+    </div>
+    <div
+      className="sc-AxjAm gBtiDd"
+    >
+      <div
+        className="sc-AxjAm yYRaU"
+        size="12px"
+      />
+    </div>
+    <div
+      className="sc-AxjAm fedZlK"
+      display="flex"
+    >
+      <div
+        className="sc-AxjAm iCMFnb"
+        display="flex"
+      >
+        <a
+          className="sc-AxhUy eJIopb"
+          color="text.primary"
+          fontFamily="primary"
+          fontSize={
+            Array [
+              "5",
+              "6",
+            ]
+          }
+          href=""
+          p="0"
+          to=""
+        >
+          <span
+            className="sc-AxirZ byKZYv"
+            color="text.primary"
+            display="inline-block"
+            fontFamily="primary"
+          >
+            
+          </span>
+        </a>
+        <a
+          className="sc-AxhUy iaoSGh"
+          color="gray.600"
+          fontFamily="primary"
+          fontSize="4"
+          href=""
+          mt={
+            Array [
+              "1",
+              "0",
+              "0",
+            ]
+          }
+          p={
+            Array [
+              "0",
+              "1",
+            ]
+          }
+          to=""
+        >
+          <span
+            className="sc-AxirZ igfFwH"
+            color="text.primary"
+            fontFamily="primary"
+          >
+            
+          </span>
+          <span
+            className="sc-AxirZ igfFwH"
+            color="text.primary"
+            fontFamily="primary"
+          >
+            
+          </span>
+          <span
+            className="sc-AxirZ igfFwH"
+            color="text.primary"
+            fontFamily="primary"
+          >
+            
+          </span>
+        </a>
+      </div>
+      <div
+        className="sc-AxjAm fZrlEf"
+        display="flex"
+      >
+        <p
+          className="sc-AxirZ gqgGZh"
+          color="frenchGray"
+          fontFamily="primary"
+          fontSize="4"
+        >
+          by
+        </p>
+        <p
+          className="sc-AxirZ ePVKpX"
+          color="text.primary"
+          fontFamily="primary"
+          fontSize="4"
+        >
+          
+        </p>
+      </div>
+      <div
+        className="sc-AxjAm jJqNEp"
+        display="flex"
+      >
+        <p
+          className="sc-AxirZ gdOnNB"
+          color="gray.600"
+          fontFamily="primary"
+          fontSize="4"
+        >
+          
+        </p>
+        <div
+          className="sc-AxjAm krOivm"
+          display="flex"
+        >
+          <button
+            aria-label="Hide News Feed"
+            className="sc-AxhCb lTgye"
+            fontFamily="primary"
+            fontSize="15px"
+            onClick={[Function]}
+          >
+            <span
+              className="sc-AxirZ gdOnNB"
+              color="gray.600"
+              fontFamily="primary"
+              fontSize="4"
+            >
+              [
+            </span>
+            <span
+              className="sc-AxirZ lnGsdQ"
+              color="text.primary"
+              fontFamily="primary"
+              fontSize="4"
+            >
+              hide
+            </span>
+            <span
+              className="sc-AxirZ gdOnNB"
+              color="gray.600"
+              fontFamily="primary"
+              fontSize="4"
+            >
+              ]
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`NewsFeed Should render component with default props 1`] = `
+<div
+  className="sc-AxjAm ccOFVg"
+  display="flex"
+  width="100%"
+>
+  <div
+    className="sc-AxjAm kzHeKe"
+    display="flex"
+    width="100%"
+  >
+    <div
+      className="sc-AxjAm bUildF"
+      width={
+        Array [
+          "40px",
+          "80px",
+        ]
+      }
+    >
+      <p
+        className="sc-AxirZ EZtwn"
+        color="text.primary"
+        fontFamily="primary"
+      >
+        0
+      </p>
+    </div>
+    <div
+      className="sc-AxjAm iAlmwV"
+    >
+      <p
+        className="sc-AxirZ eZcgVC"
+        color="primary.dark"
+        fontFamily="primary"
+      >
+        0
+      </p>
+    </div>
+    <div
+      className="sc-AxjAm gBtiDd"
+    >
+      <button
+        aria-label="Up Vote"
+        className="sc-AxhCb lTgye"
+        fontFamily="primary"
+        fontSize="15px"
+        onClick={[Function]}
+      >
+        <img
+          alt="Up Vote"
+          className="sc-AxiKw eYIUPg"
+          size="12px"
+          src="/assets/images/grayarrow2x.gif"
+        />
+      </button>
+    </div>
+    <div
+      className="sc-AxjAm fedZlK"
+      display="flex"
+    >
+      <div
+        className="sc-AxjAm iCMFnb"
+        display="flex"
+      >
+        <a
+          className="sc-AxhUy eJIopb"
+          color="text.primary"
+          fontFamily="primary"
+          fontSize={
+            Array [
+              "5",
+              "6",
+            ]
+          }
+          href=""
+          p="0"
+          to=""
+        >
+          <span
+            className="sc-AxirZ byKZYv"
+            color="text.primary"
+            display="inline-block"
+            fontFamily="primary"
+          >
+            
+          </span>
+        </a>
+        <a
+          className="sc-AxhUy iaoSGh"
+          color="gray.600"
+          fontFamily="primary"
+          fontSize="4"
+          href=""
+          mt={
+            Array [
+              "1",
+              "0",
+              "0",
+            ]
+          }
+          p={
+            Array [
+              "0",
+              "1",
+            ]
+          }
+          to=""
+        >
+          <span
+            className="sc-AxirZ igfFwH"
+            color="text.primary"
+            fontFamily="primary"
+          >
+            
+          </span>
+          <span
+            className="sc-AxirZ igfFwH"
+            color="text.primary"
+            fontFamily="primary"
+          >
+            
+          </span>
+          <span
+            className="sc-AxirZ igfFwH"
+            color="text.primary"
+            fontFamily="primary"
+          >
+            
+          </span>
+        </a>
+      </div>
+      <div
+        className="sc-AxjAm fZrlEf"
+        display="flex"
+      >
+        <p
+          className="sc-AxirZ gqgGZh"
+          color="frenchGray"
+          fontFamily="primary"
+          fontSize="4"
+        >
+          by
+        </p>
+        <p
+          className="sc-AxirZ ePVKpX"
+          color="text.primary"
+          fontFamily="primary"
+          fontSize="4"
+        >
+          
+        </p>
+      </div>
+      <div
+        className="sc-AxjAm jJqNEp"
+        display="flex"
+      >
+        <p
+          className="sc-AxirZ gdOnNB"
+          color="gray.600"
+          fontFamily="primary"
+          fontSize="4"
+        >
+          
+        </p>
+        <div
+          className="sc-AxjAm krOivm"
+          display="flex"
+        >
+          <button
+            aria-label="Hide News Feed"
+            className="sc-AxhCb lTgye"
+            fontFamily="primary"
+            fontSize="15px"
+            onClick={[Function]}
+          >
+            <span
+              className="sc-AxirZ gdOnNB"
+              color="gray.600"
+              fontFamily="primary"
+              fontSize="4"
+            >
+              [
+            </span>
+            <span
+              className="sc-AxirZ lnGsdQ"
+              color="text.primary"
+              fontFamily="primary"
+              fontSize="4"
+            >
+              hide
+            </span>
+            <span
+              className="sc-AxirZ gdOnNB"
+              color="gray.600"
+              fontFamily="primary"
+              fontSize="4"
+            >
+              ]
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

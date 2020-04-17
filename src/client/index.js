@@ -13,4 +13,8 @@ hydrate(
   document.getElementById(config.reactAppId)
 );
 
-serviceWorker.register();
+if (process.env.NODE_ENV === 'production') {
+  serviceWorker.register();
+} else {
+  serviceWorker.unregister();
+}
