@@ -36,7 +36,7 @@ function NewsFeed(props) {
       width="100%"
     >
       <Box display="flex" alignItems="center" width="100%">
-        <Box ml={['2', '5']} mr={['2', '5']} width={['40px', '80px']}>
+        <Box ml="2" mr="2" width={['40px', '80px']}>
           <Text textAlign="right">{totalComments}</Text>
         </Box>
         <Box padding="2">
@@ -75,7 +75,7 @@ function NewsFeed(props) {
                 noTextOverflow
                 as="span"
                 display="inline-block"
-                maxWidth={['200px', '300px', '300px']}
+                maxWidth={['200px', '400px', '300px']}
               >
                 {title}
               </Text>

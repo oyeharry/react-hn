@@ -23,7 +23,7 @@ Anchor.defaultProps = {
   color: 'text.primary',
   href: null,
   to: '',
-  // children: null,
+  children: null,
   maxWidth: null,
   noTextOverflow: false,
 };
@@ -33,7 +33,7 @@ Anchor.propTypes = {
   fontSize: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   href: PropTypes.string,
   to: PropTypes.string,
-  // children: PropTypes.oneOfType([PropTypes.elementType, PropTypes.array]),
+  children: PropTypes.node,
   maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   noTextOverflow: PropTypes.bool,
 };

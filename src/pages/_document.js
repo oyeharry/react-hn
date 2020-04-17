@@ -42,7 +42,7 @@ Document.defaultProps = {
 Document.propTypes = {
   title: PropTypes.string,
   styles: PropTypes.arrayOf(PropTypes.object),
-  children: PropTypes.oneOfType([PropTypes.elementType, PropTypes.array]),
+  children: PropTypes.node,
   data: PropTypes.shape({}),
 };
 
