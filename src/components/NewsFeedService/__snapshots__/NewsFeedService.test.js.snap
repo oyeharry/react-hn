@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewsFeedService Should get valid response of news feed 1`] = `
+Object {
+  "hits": Array [
+    Object {
+      "id": "3078128",
+      "linkDomain": "apple.com",
+      "postedWhen": "9 years ago",
+      "title": "Steve Jobs has passed away.",
+      "totalComments": 376,
+      "totalUpVotes": 4271,
+      "url": "http://www.apple.com/stevejobs/",
+      "username": "patricktomas",
+    },
+    Object {
+      "id": "13682022",
+      "linkDomain": "susanjfowler.com",
+      "postedWhen": "3 years ago",
+      "title": "Reflecting on one very, very strange year at Uber",
+      "totalComments": 1014,
+      "totalUpVotes": 4107,
+      "url": "https://www.susanjfowler.com/blog/2017/2/19/reflecting-on-one-very-strange-year-at-uber",
+      "username": "grey-area",
+    },
+  ],
+  "hitsPerPage": 2,
+  "nbPages": 500,
+  "page": 1,
+}
+`;
