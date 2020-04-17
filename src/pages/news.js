@@ -9,6 +9,8 @@ import NewsFeed from '../components/NewsFeed';
 import NewsFeedService from '../components/NewsFeedService';
 import UserService from '../components/UserService';
 
+let curPageNewsFeedData;
+
 export async function getServerSideProps(req) {
   const { params } = req;
   const pageNum = params.pageNum || 0;
@@ -32,9 +34,10 @@ function News(props) {
   const [userData, setUserData] = useState(appUserData);
   const [newsFeedDataByPage, setNewsFeedDataByPage] = useState(newsFeedData);
   const [newsFeedDataLoading, setNewsFeedDataLoading] = useState(false);
-  const [curPageNewsFeedData = { hits: [] }, setCurPageNewsFeedData] = useState(
-    newsFeedDataByPage[pageNum]
-  );
+  const {
+    votedNewsFeedIds: userVotedNewsFeedIds = [],
+    hiddenNewsFeedIds: userHiddenNewsFeedIds = [],
+  } = userData || {};
 
   const onUpVoteButtonClick = (id) => {
     UserService.voteNewsFeed(id).then((response) => {
@@ -81,15 +84,13 @@ function News(props) {
     }
   }, [pageNum]);
 
-  useEffect(() => {
-    const curPageNewsFeedData = newsFeedDataByPage[pageNum] || { hits: [] };
-    setCurPageNewsFeedData(curPageNewsFeedData);
-  }, [newsFeedDataByPage, userData]);
+  if (newsFeedDataByPage[pageNum]) {
+    curPageNewsFeedData = newsFeedDataByPage[pageNum];
+  }
 
-  const {
-    votedNewsFeedIds: userVotedNewsFeedIds = [],
-    hiddenNewsFeedIds: userHiddenNewsFeedIds = [],
-  } = userData || {};
+  if (!curPageNewsFeedData) {
+    return null;
+  }
 
   return (
     <Box pt="3" bg="springWood">
