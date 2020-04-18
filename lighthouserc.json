@@ -1,0 +1,21 @@
+{
+  "ci": {
+    "assert": {
+      "preset": "lighthouse:recommended",
+      "assertions": {
+        "categories.pwa": ["error", { "minScore": 0.9 }],
+        "bypass": ["warn", { "minScore": 0 }],
+        "offline-start-url": ["error", { "minScore": 1 }],
+        "service-worker": ["error", { "minScore": 1 }],
+        "works-offline": ["error", { "minScore": 1 }],
+        "redirects-http": ["warn", { "minScore": 0 }],
+        "render-blocking-resources": ["warn", { "maxLength": 1 }],
+        "uses-http2": ["warn", { "minScore": 0 }],
+        "dom-size": ["warn", { "minScore": 0.8 }],
+        "link-text": ["warn", { "minScore": 0.8 }],
+        "tap-targets": ["error", { "minScore": 0.6 }],
+        "color-contrast": ["warn", { "minScore": 0.8 }]
+      }
+    }
+  }
+}
