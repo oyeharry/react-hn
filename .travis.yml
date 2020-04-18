@@ -1,4 +1,9 @@
 language: node_js
+addons:
+  chrome: stable
 node_js: '10'
+before_install:
+  - npm install -g @lhci/cli@0.3.x
 script:
   - yarn test:build
+  - lhci autorun --collect.startServerCommand="yarn start" --collect.url="http://localhost:9002/" # run lighthouse CI
