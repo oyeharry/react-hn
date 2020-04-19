@@ -24,7 +24,7 @@ function useNewsFeedData(pageNum = 0, initialNewsFeedData = {}) {
           setNewsFeedDataLoading(false);
         });
     }
-  }, [pageNum]);
+  }, [newsFeedDataByPage, pageNum]);
 
   if (newsFeedDataByPage[pageNum]) {
     curPageNewsFeedData = newsFeedDataByPage[pageNum];
