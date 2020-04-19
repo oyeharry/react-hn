@@ -34,7 +34,7 @@ const Theme = {
   fonts: {
     primary: `Arial, ${fallbackFonts}`,
   },
-  fontSizes: [2, 4, 8, 10, 12, 14, 16, 18],
+  fontSizes: [2, 4, 8, 10, 12, 14, 16, 18, 22, 24, 26, 28, 32, 38, 42, 48, 64],
   fontWeights: [],
   space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
   breakpoints,
