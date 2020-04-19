@@ -45,10 +45,18 @@ function getProcessedNewsFeedData(newsFeedData) {
 
 export async function queryNewsFeed(page, hitsPerPage = 30) {
   const url = `${newsFeedSearchEndpoint}&page=${page}&hitsPerPage=${hitsPerPage}`;
-  const response = await fetch(url);
 
-  const newsFeedData = await response.json();
-  return getProcessedNewsFeedData(newsFeedData);
+  try {
+    const response = await fetch(url);
+    if (response.ok) {
+      const newsFeedData = await response.json();
+      return getProcessedNewsFeedData(newsFeedData);
+    } else {
+      return { error: true };
+    }
+  } catch (e) {
+    return { error: true };
+  }
 }
 
 export default { queryNewsFeed };

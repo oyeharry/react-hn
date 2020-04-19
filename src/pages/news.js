@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 
@@ -8,8 +8,8 @@ import Anchor from '../components/Anchor';
 import NewsFeed from '../components/NewsFeed';
 import NewsFeedService from '../components/NewsFeedService';
 import UserService from '../components/UserService';
-
-let curPageNewsFeedData;
+import useNewsFeedData from '../components/useNewsFeedData';
+import useUserData from '../components/useUserData';
 
 export async function getServerSideProps(req) {
   const { params } = req;
@@ -17,13 +17,12 @@ export async function getServerSideProps(req) {
   const newsFeedPageData = await NewsFeedService.queryNewsFeed(
     params.pageNum || 0
   );
+  const userData = await UserService.getUserData();
 
   return {
     props: {
       newsFeedData: { [pageNum]: newsFeedPageData },
-      // votedNewsFeedIds and hiddenNewsFeedIds Should be updated once service integrated
-      // userData: { votedNewsFeedIds: null, hiddenNewsFeedIds: null },
-      userData: {},
+      userData,
     },
   };
 }
@@ -31,71 +30,48 @@ export async function getServerSideProps(req) {
 function News(props) {
   const { newsFeedData, userData: appUserData } = props;
   const { pageNum = 0 } = useParams();
-  const [userData, setUserData] = useState(appUserData);
-  const [newsFeedDataByPage, setNewsFeedDataByPage] = useState(newsFeedData);
-  const [newsFeedDataLoading, setNewsFeedDataLoading] = useState(false);
+  const { userData, voteNewsFeedOfId, hideNewsFeedOfId } = useUserData(
+    appUserData
+  );
+  const { newsFeedDataLoading, curPageNewsFeedData } = useNewsFeedData(
+    pageNum,
+    newsFeedData
+  );
+
   const {
     votedNewsFeedIds: userVotedNewsFeedIds = [],
     hiddenNewsFeedIds: userHiddenNewsFeedIds = [],
-  } = userData || {};
-
-  const onUpVoteButtonClick = (id) => {
-    UserService.voteNewsFeed(id).then((response) => {
-      if (response.success) {
-        userData.votedNewsFeedIds.push(id);
-        setUserData({ ...userData });
-      }
-    });
-  };
-
-  const onHideButtonClick = (id) => {
-    UserService.hideNewsFeed(id).then((response) => {
-      if (response.success) {
-        userData.hiddenNewsFeedIds.push(id);
-        setUserData({ ...userData });
-      }
-    });
-  };
+  } = userData;
 
   useEffect(() => {
-    if (!newsFeedDataByPage[pageNum]) {
-      setNewsFeedDataLoading(true);
-      NewsFeedService.queryNewsFeed(pageNum)
-        .then((fetchedNewsFeedData) => {
-          setNewsFeedDataByPage({
-            ...newsFeedDataByPage,
-            [pageNum]: fetchedNewsFeedData,
-          });
-          setNewsFeedDataLoading(false);
-          window.scrollTo(0, 0);
-        })
-        .catch(() => {
-          setNewsFeedDataLoading(false);
-        });
-    }
-
-    if (!userData.votedNewsFeedIds || !userData.hiddenNewsFeedIds) {
-      Promise.all([
-        UserService.getVotedNewsFeedIds(),
-        UserService.getHiddenNewsFeedIds(),
-      ]).then(([votedNewsFeedIds, hiddenNewsFeedIds]) => {
-        setUserData({ ...userData, votedNewsFeedIds, hiddenNewsFeedIds });
-      });
-    }
-  }, [pageNum]);
-
-  if (newsFeedDataByPage[pageNum]) {
-    curPageNewsFeedData = newsFeedDataByPage[pageNum];
-  }
+    window.scrollTo(0, 0);
+  }, [curPageNewsFeedData]);
 
   if (!curPageNewsFeedData) {
     return null;
   }
 
+  const {
+    error: curPageNewsFeedError,
+    hits: curPageNewsFeedHits,
+  } = curPageNewsFeedData;
+
+  if (curPageNewsFeedError) {
+    return (
+      <Box p="4" bg="springWood" display="flex" justifyContent="center">
+        <Text fontSize="8">&#128531;</Text>
+        <Text fontSize="6" ml="2" mr="2">
+          Whoops! Something went wrong on this page.
+        </Text>
+        <Text fontSize="8">&#128531;</Text>
+      </Box>
+    );
+  }
+
   return (
     <Box pt="3" bg="springWood">
-      {curPageNewsFeedData.hits
-        .filter((newsFeedHit) => {
+      {curPageNewsFeedHits
+        .filter(newsFeedHit => {
           const { id } = newsFeedHit;
           return userHiddenNewsFeedIds.indexOf(id) === -1;
         })
@@ -105,8 +81,8 @@ function News(props) {
           return (
             <NewsFeed
               voted={userVotedNewsFeedIds.indexOf(id) !== -1}
-              onUpVoteButtonClick={onUpVoteButtonClick}
-              onHideButtonClick={onHideButtonClick}
+              onUpVoteButtonClick={voteNewsFeedOfId}
+              onHideButtonClick={hideNewsFeedOfId}
               highlighted={index % 2 !== 0}
               key={id}
               data={newsFeedHit}

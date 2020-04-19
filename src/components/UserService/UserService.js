@@ -53,9 +53,19 @@ export async function getHiddenNewsFeedIds() {
   return getLocalStorageHiddenNewsIds();
 }
 
+export async function getUserData() {
+  if (typeof window === 'object') {
+    const votedNewsFeedIds = await getVotedNewsFeedIds();
+    const hiddenNewsFeedIds = await getHiddenNewsFeedIds();
+    return { votedNewsFeedIds, hiddenNewsFeedIds };
+  }
+  return {};
+}
+
 export default {
   voteNewsFeed,
   hideNewsFeed,
   getVotedNewsFeedIds,
   getHiddenNewsFeedIds,
+  getUserData,
 };

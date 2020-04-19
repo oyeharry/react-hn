@@ -6,6 +6,7 @@ import newsFeedMockResponse from './NewsFeedResponseMock';
 import NewsFeedService from './NewsFeedService';
 
 const mockedResponse = Promise.resolve({
+  ok: true,
   json: () => {
     return {
       ...newsFeedMockResponse,
