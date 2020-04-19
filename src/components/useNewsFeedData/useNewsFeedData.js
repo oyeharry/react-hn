@@ -19,7 +19,6 @@ function useNewsFeedData(pageNum = 0, initialNewsFeedData = {}) {
             [pageNum]: fetchedNewsFeedData,
           });
           setNewsFeedDataLoading(false);
-          // window.scrollTo(0, 0);
         })
         .catch(() => {
           setNewsFeedDataLoading(false);

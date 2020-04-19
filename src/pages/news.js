@@ -71,6 +71,10 @@ function News(props) {
     }
   }, [pageNum]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [curPageNewsFeedData]);
+
   if (!curPageNewsFeedData) {
     return null;
   }
