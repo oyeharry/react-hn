@@ -33,10 +33,11 @@ function News(props) {
   const { userData, voteNewsFeedOfId, hideNewsFeedOfId } = useUserData(
     appUserData
   );
-  const { newsFeedDataLoading, curPageNewsFeedData } = useNewsFeedData(
-    pageNum,
-    newsFeedData
-  );
+  const {
+    newsFeedDataLoading,
+    curPageNewsFeedData,
+    newsFeedDataByPage,
+  } = useNewsFeedData(pageNum, newsFeedData);
 
   const {
     votedNewsFeedIds: userVotedNewsFeedIds = [],
@@ -44,8 +45,10 @@ function News(props) {
   } = userData;
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [curPageNewsFeedData]);
+    if (newsFeedDataByPage[pageNum]) {
+      window.scrollTo(0, 0);
+    }
+  }, [newsFeedDataByPage, pageNum]);
 
   if (!curPageNewsFeedData) {
     return null;
