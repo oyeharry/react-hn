@@ -19,20 +19,17 @@ function App(props) {
       <Box flexDirection="column" maxWidth="2" margin="0 auto">
         <Header></Header>
         <Switch>
-          {routes.map((route) => {
+          {routes.map(route => {
             const { path, exact, component: Component, ...rest } = route;
             return (
-              <Route
-                key={path}
-                path={path}
-                exact={exact}
-                render={(props) => (
-                  <Component {...pageProps} {...props} {...rest} />
-                )}
-              />
+              <Route key={path} path={path} exact={exact}>
+                <Component {...pageProps} {...props} {...rest} />
+              </Route>
             );
           })}
-          <Route render={(props) => <Page404 {...pageProps} {...props} />} />
+          <Route>
+            <Page404 {...pageProps} {...props} />
+          </Route>
         </Switch>
       </Box>
     </ThemeProvider>

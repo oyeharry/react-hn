@@ -39,8 +39,10 @@ function NewsFeed(props) {
         <Box ml="2" mr="2" width={['40px', '80px']}>
           <Text textAlign="right">{totalComments}</Text>
         </Box>
-        <Box padding="2">
-          <Text color="primary.dark">{totalUpVotes}</Text>
+        <Box padding="2" width={['40px', '60px']}>
+          <Text color="primary.dark" textAlign="right">
+            {totalUpVotes}
+          </Text>
         </Box>
         <Box padding="0">
           {!voted && (

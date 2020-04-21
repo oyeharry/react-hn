@@ -1,8 +1,13 @@
 import fetch from 'cross-fetch';
 import formatDistanceStrict from 'date-fns/formatDistanceStrict';
 
-const newsFeedSearchEndpoint =
-  'https://hn.algolia.com/api/v1/search?tags=(story,poll)';
+const algoliaApiEndpoint = 'https://hn.algolia.com/api/v1';
+const newsFeedSearchEndpoint = `${algoliaApiEndpoint}/search?tags=story`;
+const newsFeedSearchByDateEndpoint = `${algoliaApiEndpoint}/search_by_date?tags=story`;
+const storyUrls = new Map([
+  ['topstories', newsFeedSearchEndpoint],
+  ['newstories', newsFeedSearchByDateEndpoint],
+]);
 
 function getProcessedNewsFeedData(newsFeedData) {
   const { hits: newsFeedHits = [], page, nbPages, hitsPerPage } = newsFeedData;
@@ -43,8 +48,25 @@ function getProcessedNewsFeedData(newsFeedData) {
   };
 }
 
-export async function queryNewsFeed(page, hitsPerPage = 30) {
-  const url = `${newsFeedSearchEndpoint}&page=${page}&hitsPerPage=${hitsPerPage}`;
+function getTimestampOfDays(day) {
+  return new Date().setDate(new Date().getDate() - day) / 1000;
+}
+
+export async function queryNewsFeed(params) {
+  const {
+    pageNum = 0,
+    hitsPerPage = 30,
+    dateRange = 'last24h',
+    storyType = 'topstories',
+  } = params;
+  let filters;
+
+  if (dateRange === 'last24h') {
+    filters = `&numericFilters=created_at_i>${getTimestampOfDays(1)}`;
+  }
+
+  const apiUrl = storyUrls.get(storyType);
+  const url = `${apiUrl}&page=${pageNum}&hitsPerPage=${hitsPerPage}${filters}`;
 
   try {
     const response = await fetch(url);

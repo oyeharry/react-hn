@@ -3,13 +3,7 @@ import Page404 from './404';
 
 const routes = [
   {
-    path: '/news/:pageNum',
-    cache: true,
-    component: News,
-    getServerSideProps: newsGetServerSideProps,
-  },
-  {
-    path: '/news',
+    path: '/news/:storyType/:pageNum?',
     cache: true,
     component: News,
     getServerSideProps: newsGetServerSideProps,
