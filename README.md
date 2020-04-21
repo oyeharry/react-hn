@@ -107,10 +107,6 @@ Before you start, take a moment to see how the project structure looks like:
 └── yarn.lock
 ```
 
-### Learn More
-
-TODO
-
 ### Development workflow
 
 #### Start development server
