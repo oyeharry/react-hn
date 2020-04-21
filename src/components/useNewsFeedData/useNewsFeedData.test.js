@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { renderHook } from '@testing-library/react-hooks';
 
 import NewsFeedService from '../NewsFeedService';
@@ -7,16 +8,20 @@ NewsFeedService.queryNewsFeed = jest.fn();
 
 describe('useNewsFeedData', () => {
   it('Should validate initial data', () => {
-    const initialData = { 1: { hits: [] } };
+    const initialData = { topstories_1: { hits: [] } };
 
     const { result } = renderHook(() => {
-      return useNewsFeedData(1, initialData);
+      return useNewsFeedData({
+        pageNum: 1,
+        storyType: 'topstories',
+        initialNewsFeedData: initialData,
+      });
     });
     const {
       current: { curPageNewsFeedData },
     } = result;
 
-    expect(curPageNewsFeedData).toMatchObject(initialData[1]);
+    expect(curPageNewsFeedData).toMatchObject(initialData['topstories_1']);
   });
 
   it('Should load page data if not available', async () => {
@@ -25,7 +30,12 @@ describe('useNewsFeedData', () => {
       Promise.resolve(mockData)
     );
 
-    const { result, waitForNextUpdate } = renderHook(() => useNewsFeedData(1));
+    const { result, waitForNextUpdate } = renderHook(() =>
+      useNewsFeedData({
+        pageNum: 1,
+        storyType: 'topstories',
+      })
+    );
     expect(result.current.newsFeedDataLoading).toBe(true);
 
     await waitForNextUpdate();
@@ -33,7 +43,7 @@ describe('useNewsFeedData', () => {
     expect(result.current.newsFeedDataLoading).toBe(false);
     expect(result.current.curPageNewsFeedData).toMatchObject(mockData);
     expect(result.current.newsFeedDataByPage).toMatchObject({
-      1: { ...mockData },
+      topstories_1: { ...mockData },
     });
   });
 });

@@ -12,6 +12,7 @@ const Theme = {
     primary: {
       main: '#EE6F2E',
       dark: '#9F4C1E',
+      light: '#F0C0A7',
     },
     white: '#FFF',
     black: '#FFF',

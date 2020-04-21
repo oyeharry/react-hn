@@ -29,10 +29,16 @@ exports[`NewsFeed Should render component voted enabled 1`] = `
       </p>
     </div>
     <div
-      className="sc-AxjAm iAlmwV"
+      className="sc-AxjAm eUXAfs"
+      width={
+        Array [
+          "40px",
+          "60px",
+        ]
+      }
     >
       <p
-        className="sc-AxirZ eZcgVC"
+        className="sc-AxirZ dQCLzq"
         color="primary.dark"
         fontFamily="primary"
       >
@@ -227,10 +233,16 @@ exports[`NewsFeed Should render component with default props 1`] = `
       </p>
     </div>
     <div
-      className="sc-AxjAm iAlmwV"
+      className="sc-AxjAm eUXAfs"
+      width={
+        Array [
+          "40px",
+          "60px",
+        ]
+      }
     >
       <p
-        className="sc-AxirZ eZcgVC"
+        className="sc-AxirZ dQCLzq"
         color="primary.dark"
         fontFamily="primary"
       >

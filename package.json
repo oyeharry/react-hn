@@ -6,17 +6,19 @@
   "author": "Harminder",
   "license": "MIT",
   "scripts": {
-    "dev": "run-p dev:webpack dev:start",
+    "dev": "run-s dev:webpack dev:start",
+    "dev:start": "run-p watch:dev:webpack watch:dev:server",
     "test": "jest",
     "build": "run-s clean static:copy prod:webpack",
     "start": "node ./build/server.js",
     "eslint": "eslint src/ --ext .js",
     "clean": "shx rm -rf build",
-    "dev:webpack": "webpack --config webpack.config.babel.js --mode=development -w",
-    "dev:start": "nodemon ./build/server.js",
+    "watch:dev:webpack": "webpack --config webpack.config.babel.js --mode=development --watch",
+    "watch:dev:server": "nodemon --watch build ./build/server.js",
     "test:build": "run-s eslint test build",
     "static:copy": "shx cp -r 'src/static' build",
-    "prod:webpack": "webpack --config webpack.config.babel.js --mode=production"
+    "prod:webpack": "webpack --config webpack.config.babel.js --mode=production",
+    "dev:webpack": "webpack --config webpack.config.babel.js --mode=development"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",

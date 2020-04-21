@@ -3,20 +3,25 @@ import NewsFeedService from '../NewsFeedService';
 
 let curPageNewsFeedData;
 
-function useNewsFeedData(pageNum = 0, initialNewsFeedData = {}) {
+function useNewsFeedData({ pageNum, storyType, initialNewsFeedData = {} }) {
   const [newsFeedDataByPage, setNewsFeedDataByPage] = useState(
     initialNewsFeedData
   );
   const [newsFeedDataLoading, setNewsFeedDataLoading] = useState(false);
+  const curPageDataKey = `${storyType}_${pageNum}`;
 
   useEffect(() => {
-    if (!newsFeedDataByPage[pageNum]) {
+    if (!newsFeedDataByPage[curPageDataKey]) {
       setNewsFeedDataLoading(true);
-      NewsFeedService.queryNewsFeed(pageNum)
+      const [curStoryType, curPageNum] = curPageDataKey.split('_');
+      NewsFeedService.queryNewsFeed({
+        pageNum: curPageNum,
+        storyType: curStoryType,
+      })
         .then(fetchedNewsFeedData => {
           setNewsFeedDataByPage({
             ...newsFeedDataByPage,
-            [pageNum]: fetchedNewsFeedData,
+            [curPageDataKey]: fetchedNewsFeedData,
           });
           setNewsFeedDataLoading(false);
         })
@@ -24,10 +29,10 @@ function useNewsFeedData(pageNum = 0, initialNewsFeedData = {}) {
           setNewsFeedDataLoading(false);
         });
     }
-  }, [newsFeedDataByPage, pageNum]);
+  }, [newsFeedDataByPage, curPageDataKey]);
 
-  if (newsFeedDataByPage[pageNum]) {
-    curPageNewsFeedData = newsFeedDataByPage[pageNum];
+  if (newsFeedDataByPage[curPageDataKey]) {
+    curPageNewsFeedData = newsFeedDataByPage[curPageDataKey];
   }
 
   return {

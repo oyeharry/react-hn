@@ -17,7 +17,7 @@ const mockedResponse = Promise.resolve({
 describe('NewsFeedService', () => {
   it('Should get valid response of news feed', async () => {
     fetch.mockImplementation(() => mockedResponse);
-    const response = await NewsFeedService.queryNewsFeed(1);
+    const response = await NewsFeedService.queryNewsFeed({ pageNum: 1 });
     expect(response).toMatchSnapshot();
   });
 });
